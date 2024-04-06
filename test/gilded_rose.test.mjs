@@ -51,6 +51,14 @@ describe("Gilded Rose", () => {
     expect(items[0].sellIn).toEqual(4)
   })
 
+  test("should reduce quality of Moose by 1", () => {
+    const gildedRose = new Shop([new Item("Moose", 0, 5)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).toEqual(3)
+  })
+
+
+
   test("should raise quality by 3 for Backstage passes to a TAFKAL80ETC concert", () => {
     const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 5, 5)]);
     const items = gildedRose.updateQuality();
@@ -86,6 +94,12 @@ describe("Gilded Rose", () => {
     const gildedRose = new Shop([new Item("Sulfuras, Hand of Ragnaros", 5, 5)]);
     const items = gildedRose.updateQuality();
     expect(items[0].quality).toEqual(5)
+  })
+
+  test("should not change sellIn for Sulfuras, Hand of Ragnaros", () => {
+    const gildedRose = new Shop([new Item("Sulfuras, Hand of Ragnaros", 5, 5)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].sellIn).toEqual(5)
   })
 
   test("should not change sellIn for Sulfuras, Hand of Ragnaros", () => {
