@@ -53,7 +53,9 @@ export class Shop {
         return;
       }
 
-      // item.quality = item.quality - 1;
+      if (item.quality > 0) {
+        // item.quality = item.quality - 1;
+      }
 
 
     }
