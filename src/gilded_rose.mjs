@@ -28,7 +28,7 @@ export class Shop {
 
   checkPastSellDate(item) {
     if (item.sellIn < 0) {
-      if (item.name !== "Aged Brie") {
+      if (item.name !== "Aged Brie")
         if (item.name !== "Backstage passes to a TAFKAL80ETC concert") {
           if (item.quality > 0) {
             if (item.name !== "Sulfuras, Hand of Ragnaros") {
@@ -41,14 +41,13 @@ export class Shop {
         else {
           item.quality = item.quality - item.quality;
         }
-      }
 
-      // Aged cheese increases in value as time passes
-      else {
-        if (item.quality < 50) {
+
+      // Aged cheese increases in value
+        if (item.name === "Aged Brie" && item.quality < 50) {
           item.quality = item.quality + 1;
         }
-      }
+
     }
   }
 
