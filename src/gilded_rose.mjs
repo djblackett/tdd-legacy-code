@@ -25,34 +25,29 @@ export class Shop {
     }
   }
 
-
   checkPastSellDate(item) {
+
+    // sell by date has passed
     if (item.sellIn < 0) {
-      if (item.name !== "Aged Brie")
-        if (item.name !== "Backstage passes to a TAFKAL80ETC concert") {
-          if (item.quality > 0) {
-            if (item.name !== "Sulfuras, Hand of Ragnaros") {
-              item.quality = item.quality - 1;
-            }
-          }
-        }
 
-        // concert tickets have no value after date of concert
-          if (item.name === "Backstage passes to a TAFKAL80ETC concert") {
-            item.quality = item.quality - item.quality;
-          }
-
-      // Aged cheese increases in value
-        else if (item.name === "Aged Brie" && item.quality < 50) {
-          item.quality = item.quality + 1;
-        }
-
-      else if (item.name === "Sulfuras, Hand of Ragnaros") {
-
+      // concert tickets have no value after date of concert
+      if (item.name === "Backstage passes to a TAFKAL80ETC concert") {
+        item.quality = item.quality - item.quality;
       }
 
+      // Aged cheese increases in value
+      else if (item.name === "Aged Brie") {
+        if (item.quality < 50) {
+          item.quality = item.quality + 1;
+        }
+      }
+
+      // unaffected by time
+      else if (item.name === "Sulfuras, Hand of Ragnaros") {}
+
+      // everything else decrement
       else if (item.quality > 0) {
-        // item.quality = item.quality - 1;
+        item.quality = item.quality - 1;
       }
     }
   }
