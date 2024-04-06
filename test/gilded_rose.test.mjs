@@ -20,6 +20,13 @@ describe("Gilded Rose", () => {
     expect(shop.items[0]).toBeInstanceOf(Item);
   })
 
+  test("Shop constructor", () => {
+    const shop = new Shop()
+    expect(shop.items).toHaveLength(0)
+  })
+
+
+
 
 
   describe("Aged Brie", () => {
@@ -59,11 +66,13 @@ describe("Gilded Rose", () => {
       expect(items[0].quality).toEqual(49);
     })
 
-    test("should raise quality by 2 when quality is 47 and sellIn == 0", () => {
+    test("should raise quality by 1 when quality is 47 and sellIn == 0", () => {
       const gildedRose = new Shop([new Item("Aged Brie", 0, 49)]);
       const items = gildedRose.updateQuality();
       expect(items[0].quality).toEqual(50);
     })
+
+
 
 
   })
@@ -128,6 +137,13 @@ describe("any string other than hard coded example", () => {
       expect(items[0].quality).toEqual(51)
     })
 
+
+    test("should not change quality when sellIn = 0 and quality > 50 ___???", () => {
+      const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 6, -5)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].quality).toEqual(-3)
+    })
+
     test("should not change quality for Backstage passes to a TAFKAL80ETC concert when sellIn > 11 and quality > 50", () => {
       const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 11, 51)]);
       const items = gildedRose.updateQuality();
@@ -135,9 +151,9 @@ describe("any string other than hard coded example", () => {
     })
 
     test("should +1 quality when sellIn = 12 and quality = 49", () => {
-      const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 12, 49)]);
+      const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 12, 48)]);
       const items = gildedRose.updateQuality();
-      expect(items[0].quality).toEqual(50)
+      expect(items[0].quality).toEqual(49)
     })
 
     test("should +1 quality when sellIn = 12 and quality = 49", () => {
@@ -146,8 +162,32 @@ describe("any string other than hard coded example", () => {
       expect(items[0].quality).toEqual(0)
     })
 
+    test("should +1 quality when sellIn = 11 and quality = 48", () => {
+      const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 11, 48)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].quality).toEqual(49)
+    })
+
     test("should +1 quality when sellIn = 11 and quality = 49", () => {
-      const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 11, 49)]);
+      const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 10, 49)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].quality).toEqual(50)
+    })
+
+    test("should +1 quality when sellIn = 5 and quality = 49", () => {
+      const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 5, 49)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].quality).toEqual(50)
+    })
+
+    test("should +1 quality when sellIn = 6 and quality = 49", () => {
+      const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 6, 49)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].quality).toEqual(50)
+    })
+
+    test("should +2 quality when sellIn = 6 and quality = 48", () => {
+      const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 6, 48)]);
       const items = gildedRose.updateQuality();
       expect(items[0].quality).toEqual(50)
     })
