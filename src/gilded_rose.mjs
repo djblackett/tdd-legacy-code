@@ -7,22 +7,20 @@ export class Item {
 }
 
 export class Shop {
-  specialItems = ["Aged Brie", "Backstage passes to a TAFKAL80ETC concert", "Sulfuras, Hand of Ragnaros"];
   constructor(items = []) {
     this.items = items;
   }
 
-  checkForBackstagePasses(item) {
-    if (item.name === "Backstage passes to a TAFKAL80ETC concert") {
-      if (item.sellIn < 11) {
-        if (item.quality < 50) {
-          item.quality = item.quality + 1;
-        }
+  // backstage passes increase in value as concert day approaches
+  checkTimeToConcert(item) {
+    if (item.sellIn < 11) {
+      if (item.quality < 50) {
+        item.quality = item.quality + 1;
       }
-      if (item.sellIn < 6) {
-        if (item.quality < 50) {
-          item.quality = item.quality + 1;
-        }
+    }
+    if (item.sellIn < 6) {
+      if (item.quality < 50) {
+        item.quality = item.quality + 1;
       }
     }
   }
@@ -36,9 +34,13 @@ export class Shop {
               item.quality = item.quality - 1;
             }
           }
-        } else {
+        }
+
+        // concert tickets have no value after date of concert
+        else {
           item.quality = item.quality - item.quality;
         }
+
       } else {
         if (item.quality < 50) {
           item.quality = item.quality + 1;
@@ -58,7 +60,9 @@ export class Shop {
       } else {
         if (item.quality < 50) {
           item.quality = item.quality + 1;
-            this.checkForBackstagePasses(item);
+          if (item.name === "Backstage passes to a TAFKAL80ETC concert") {
+            this.checkTimeToConcert(item);
+          }
         }
       }
       if (item.name !== "Sulfuras, Hand of Ragnaros") {
@@ -66,7 +70,6 @@ export class Shop {
       }
       this.checkPastSellDate(item);
     }
-
     return this.items;
   }
 }
