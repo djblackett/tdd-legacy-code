@@ -50,4 +50,47 @@ describe("Gilded Rose", () => {
     const items = gildedRose.updateQuality();
     expect(items[0].sellIn).toEqual(4)
   })
+
+  test("should raise quality by 3 for Backstage passes to a TAFKAL80ETC concert", () => {
+    const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 5, 5)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).toEqual(8)
+  })
+
+  test("should lower quality to 0 for Backstage passes to a TAFKAL80ETC concert when sellIn <= 0", () => {
+    const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 0, 5)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).toEqual(0)
+  })
+
+  test("should not change quality for Backstage passes to a TAFKAL80ETC concert when sellIn > 0 and quality > 50", () => {
+    const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 1, 51)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).toEqual(51)
+  })
+
+  test("should not change quality for Backstage passes to a TAFKAL80ETC concert when sellIn > 11 and quality > 50", () => {
+    const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 13, 51)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).toEqual(51)
+  })
+
+
+  test("should reduce sellIn by 1 for Backstage passes to a TAFKAL80ETC concert", () => {
+    const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 5, 5)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].sellIn).toEqual(4)
+  })
+
+  test("should not change quality for Sulfuras, Hand of Ragnaros", () => {
+    const gildedRose = new Shop([new Item("Sulfuras, Hand of Ragnaros", 5, 5)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).toEqual(5)
+  })
+
+  test("should not change sellIn for Sulfuras, Hand of Ragnaros", () => {
+    const gildedRose = new Shop([new Item("Sulfuras, Hand of Ragnaros", 5, 5)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].sellIn).toEqual(5)
+  })
 });
