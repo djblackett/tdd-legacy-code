@@ -38,9 +38,10 @@ export class Shop {
         }
 
         // concert tickets have no value after date of concert
-        else {
-          item.quality = item.quality - item.quality;
-        }
+          if (item.name === "Backstage passes to a TAFKAL80ETC concert") {
+            item.quality = item.quality - item.quality;
+          }
+
 
 
       // Aged cheese increases in value
