@@ -11,7 +11,7 @@ export class Shop {
     this.items = items;
   }
 
-  // backstage passes increase in value as concert day approaches
+  // backstage passes increase in value as concert day approaches, except for really high value concerts
   checkTimeToConcert(item) {
     if (item.sellIn < 11) {
       if (item.quality < 50) {
@@ -24,6 +24,7 @@ export class Shop {
       }
     }
   }
+
 
   checkPastSellDate(item) {
     if (item.sellIn < 0) {
@@ -40,8 +41,10 @@ export class Shop {
         else {
           item.quality = item.quality - item.quality;
         }
+      }
 
-      } else {
+      // Aged cheese increases in value as time passes
+      else {
         if (item.quality < 50) {
           item.quality = item.quality + 1;
         }
